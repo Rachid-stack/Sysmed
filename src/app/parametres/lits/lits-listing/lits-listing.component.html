@@ -1,0 +1,41 @@
+<div class="row remove-all-space">
+  <div class="col-12 remove-all-padding">
+    <app-lits-add></app-lits-add>
+    <app-lits-edit></app-lits-edit>
+    <app-lits-delete></app-lits-delete>
+
+    <table *ngIf="lits && lits.length != 0" class="table table-borderless table-striped table-hover">
+      <tr *ngFor="let lit of lits |paginate:{itemsPerPage:itemsPerPage,currentPage:p}" >
+        <td width="23%">
+          <span>Code</span> <br>
+          <span><strong>{{lit.code_lit}}</strong></span>
+        </td>
+        <td width="35%">
+          <span>Lib&eacute;ll&eacute;</span> <br>
+          <span><strong>{{lit.libelle_lit}}</strong></span>
+        </td>
+        <td width="38%">
+          <span>Description</span> <br>
+          <span><strong>{{(lit.desc_lit == '' || !lit.desc_lit)?'---':lit.desc_lit}}</strong></span>
+        </td>
+        <td width="4%">
+          <br>
+          <span class="fa fa-pencil icon-fa font-bold color-g" title="modifier" (click)="openEdit(lit._id)"></span><!--&nbsp;&nbsp;&nbsp;
+          <span class="fa fa-remove icon-fa font-bold color-g" title="supprimer" (click)="openRemove(lit._id)"></span>-->
+        </td>
+      </tr>
+    </table>
+    <div *ngIf="lits && lits.length != 0" class="pagination-div">
+      <div class="row ">
+        <div class="col-lg-6"> <!--page {{p}} sur {{totalPage}} (totale: {{total}})--> </div>
+        <div class="col-lg-6 pull-right">
+          <pagination-controls (pageChange)="p = $event" class=my-pagination></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!lits || lits.length == 0" class="bgc-w padding-sm color-gl font-bold">
+      <i>Aucun lit trouv&eacute; !!!</i>
+    </div>
+  </div>
+
+</div>

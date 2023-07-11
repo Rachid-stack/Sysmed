@@ -1,0 +1,102 @@
+<!-- <nav class="menu-left pull-left" *ngIf="isLoggedIn$ | async as isLoggedIn"> -->
+<!--
+<nav class="menu-left pull-left">
+  <ul class="main-menu">
+    <li>
+      <a href="#" routerLink="/dashboard" data-toggle="collapse" aria-expanded="false">tableau de bord</a>
+    </li>
+    <li>
+      <a href="#" routerLink="/patient" data-toggle="collapse" aria-expanded="false">patients</a>
+    </li>
+    <li>
+      <a href="#" routerLink="/home" data-toggle="collapse" aria-expanded="false">consultations</a>
+    </li>
+    <li>
+      <a href="#" data-toggle="collapse" aria-expanded="false">ordonances</a>
+    </li>
+    <li>
+      <a href="#" data-toggle="collapse" aria-expanded="false">rendez-vous</a>
+    </li>
+    <li>
+      <a href="#" data-toggle="collapse" aria-expanded="false">hospitalisation</a>
+    </li>
+    <li>
+      <a href="#" data-toggle="collapse" aria-expanded="false">examens</a>
+    </li>
+    <li>
+      <a href="#" data-toggle="collapse" aria-expanded="false">planning</a>
+    </li>
+    <li>
+      <a href="#" data-toggle="collapse" aria-expanded="false">gestion</a>
+    </li>
+    <li>
+      <a href="#" data-toggle="collapse" aria-expanded="false">statistique</a>
+    </li>
+    <li>
+      <a href="#" data-toggle="collapse" aria-expanded="false">rapports & impressions</a>
+    </li>
+    <li>
+      <a href="#parametre" data-toggle="collapse" aria-expanded="false">parametres</a>
+      <ul class="sous-menu collapse" aria-expanded="true" id="parametre">
+        <li>
+          <a href="#" routerLink="/personnel" data-toggle="collapse" aria-expanded="false">personnel</a>
+        </li>
+        <li>
+          <a href="#" data-toggle="collapse" aria-expanded="false">specialités</a>
+        </li>
+        <li>
+          <a href="#" data-toggle="collapse" aria-expanded="false">services</a>
+        </li>
+        <li>
+          <a href="#" data-toggle="collapse" aria-expanded="false">unités /chambres /lits</a>
+        </li>
+        <li>
+          <a href="#" data-toggle="collapse" aria-expanded="false">profil utilisateur</a>
+        </li>
+        <li>
+          <a href="#" routerLink="/user" data-toggle="collapse" aria-expanded="false">utilisateurs</a>
+        </li>
+        <li>
+          <a href="#" data-toggle="collapse" aria-expanded="false">base de medicament</a>
+        </li>
+        <li>
+          <a href="#" data-toggle="collapse" aria-expanded="false">base de diagnostique</a>
+        </li>
+        <li>
+          <a href="#" data-toggle="collapse" aria-expanded="false">type de rendez-vous</a>
+        </li>
+        <li>
+          <a href="#" data-toggle="collapse" aria-expanded="false">type de consultation</a>
+        </li>
+        <li>
+          <a href="#" data-toggle="collapse" aria-expanded="false">configuration menu</a>
+        </li>
+        <li>
+          <a href="#" data-toggle="collapse" aria-expanded="false">mise à jour</a>
+        </li>
+        <li>
+          <a href="#" data-toggle="collapse" aria-expanded="false">licence</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>-->
+<nav class="nav menu-div">
+  <ul class="nav navbar-right navbar-nav ">
+    <li *ngFor="let menu of menus" [ngClass]="{'active': menuCourant==menu}"><a
+            *ngIf="menu.routerLink;  else templateName" routerLink="{{menu.routerLink}}"
+            (click)="selectedMenu(menu);" [innerHTML]="menu.libelle_menu"></a>
+      <ng-template #templateName>
+        <a class="panel-title" (click)="selectedMenu(menu)" [innerHTML]="menu.libelle_menu"></a>
+      </ng-template>
+      <div class="collapse navbar-collapse " [ngClass]="{'show': menuCourant==menu }">
+        <ul *ngIf="menu.sousMenus " class=" nav navbar-right navbar-nav sub-menu " id="{{menu.code_menu}}">
+          <li *ngFor="let sousMenu of menu.sousMenus" [ngClass]="{'actived': sousMenuCourant==sousMenu}">
+            <a routerLink="{{sousMenu.routerLink_sousMenu}}" (click)="selectedSousmenu(sousMenu);"
+               [ngClass]="{active: sousMenuCourant==sousMenu}" [innerHTML]="sousMenu.libelle_sousMenu"></a>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,58 @@
+<div class="row remove-all-space"  *ngIf="consultation">
+  <div class="col-12 remove-all-padding">D&eacute;tails de la consultation n&deg; <span style="color: red; font-weight: bold">{{consultation.code_consultation}}</span></div>
+
+  <div class="col-12 remove-all-padding bgc-w">
+    <div class="row padding-left-md">
+      <div class="col-9">
+        <div class="row">
+          <div class="col-4 remove-all-padding">
+            <span>Med&eacute;cin traitant</span><br>
+            <span class="font-bold">{{ consultation.medecin }}</span>
+          </div>
+          <div class="col-4 remove-all-padding">
+            <span>Motifs</span><br>
+            <span class="font-bold" *ngFor="let motif of motifs">{{ motif.libelle_cmotif }}; </span>
+          </div>
+          <div class="col-4 remove-all-padding">
+            <span>Ordonnance</span><br>
+            <span class="font-bold">---</span>
+          </div>
+          <div class="col-8 remove-all-padding padding-top-lt">
+            <span>Diagnostique</span><br>
+            <p class="bgc-gw border-no-radus-g font-italic padding-lt margin-rigth-lt">{{ consultation.resultat_consultation }}</p>
+          </div>
+          <div class="col-4 remove-all-padding padding-top-lt">
+            <span>Ordonnances</span><br>
+            <span class="font-bold">---</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 padding-right-md">
+        <label>Historique des transferts</label>
+        <table class="table table-borderless table-striped min-h">
+          <tbody *ngIf="transferts && transferts.length != 0">
+          <tr *ngFor="let transfert of transferts">
+            <td>
+              <span>date</span><br>
+              <span class="font-bold">{{ transfert.date_transfert | date:'dd/MM/yyyy' }}</span>
+            </td>
+            <td>
+              <span>Med&eacute;cin</span><br>
+                        <span *ngFor="let tmedecin of medecins">
+                          <span class="font-bold" *ngIf="transfert.id_medecin == tmedecin.id">{{ tmedecin.nom }}</span>
+                        </span>
+            </td>
+          </tr>
+          </tbody>
+          <tbody *ngIf="!transferts || transferts.length == 0">
+          <tr>
+            <td colspan="2">
+              <span class="font-bold">Aucune donn&eacute;e trouv&eacute;e !!!</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

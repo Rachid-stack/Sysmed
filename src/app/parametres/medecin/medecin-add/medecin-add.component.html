@@ -1,0 +1,221 @@
+<div class="row">
+  <div class="col-lg-12 remove-all-padding padding-top-sm padding-left-sm">
+    Liste des m&eacute;d&eacute;cins&nbsp;&nbsp;<span class="fa fa-plus-circle icon-fa font-bold color-g" title="nouveau m&eacute;d&eacute;cin" (click)="open(addMedecinModal)"></span>
+  </div>
+  <app-personne-choose (curentPersonne)="setPersonne($event);"></app-personne-choose>
+
+
+  <ng-template class="modal fade" #addMedecinModal let-c="close" let-d="dismiss" data-backdrop="static" data-keyboard="false"
+               tabindex="-1" role="dialog" aria-labelledby="addMedecinModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content remove-all-padding">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addMedecinModalLongTitle">Ajouter un medecin</h5>
+          <span class="pull-right fa fa-window-close" (click)="modalReference.close()"></span>
+        </div>
+        <div class="modal-body remove-bottom-padding">
+          <form #medecinForm="ngForm" (ngSubmit)="ajouterPersonnel(); ">
+            <label class="label-bold">Identification</label>
+            <div class="row remove-all-space bgc-gw border-no-radus-g padding-lt">
+              <label  class="match-content">
+                <input name="type_check" type="radio" class="radio" (click)="choseNew()" checked> Personne non employ&eacute;e
+              </label>
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="label-bold">Nom</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="nom_pers" [(ngModel)]="newPersonne.nom_pers" type="text"
+                             autocomplete="off" class="form-control">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="label-bold">T&eacute;l&eacute;phone portable</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="telephone_portable" [(ngModel)]="newPersonne.telephone_portable" type="text"
+                             autocomplete="off" class="form-control">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="label-bold">Pr&eacute;nom(s)</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="prenom_pers" [(ngModel)]="newPersonne.prenom_pers" type="text"
+                             autocomplete="off" class="form-control">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="label-bold">T&eacute;l&eacute;phone fixe</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="telephone_fixe" [(ngModel)]="newPersonne.telephone_fixe" type="text"
+                             autocomplete="off" class="form-control">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="label-bold">Date de naissance</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="date_naiss_pers" [(ngModel)]="newPersonne.date_naiss_pers" type="date"
+                             autocomplete="off" class="form-control">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="label-bold">Adresse</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="adresse" [(ngModel)]="newPersonne.adresse" type="text"
+                             autocomplete="off" class="form-control">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="label-bold">Lieu de naissance</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="lieu_naiss_pers" [(ngModel)]="newPersonne.lieu_naiss_pers" type="text"
+                             autocomplete="off" class="form-control">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="label-bold">E-Mail</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="email" [(ngModel)]="newPersonne.email" type="text"
+                             autocomplete="off" class="form-control">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <label  class="match-content">
+                <input name="type_check" type="radio" class="radio" (click)="choseExiste()"> Choisir un employ&eacute;e
+              </label>
+              <div class="col-8">
+                <div class="form-group">
+                  <label class="label-bold">Employ&eacute;</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="personne-choisi" [(ngModel)]="nom_prenom" type="text"
+                             autocomplete="off" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label class="label-bold"></label>
+                  <div class="row">
+                    <div class="col-12">
+                      <button type="button" class="btn btn-secondary modal-bouton" (click)="chooseEmp()" [disabled]="isNew">
+                        <span class="fa fa-user"></span> Choisir un employ&eacute;</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row remove-all-space margin-bottom-md">
+              <div class="col-6 remove-all-space padding-right-sm">
+                <div class="form-group">
+                  <label class="label-bold">Code m&eacute;d&eacute;cin</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="code_med" [(ngModel)]="newMedecin.code_med" type="text"
+                             required autocomplete="off" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="label-bold">Sp&eacute;cialit&eacute;</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <select name="id_specialite" [(ngModel)]="newMedecin.id_specialite"
+                              required autocomplete="off" class="form-control">
+                        <option value="">---</option>
+                        <option *ngFor="let specialite of specialites" [value]="specialite._id" >{{specialite.libelle_spe}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="label-bold">Titre</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <select name="id_titre" [(ngModel)]="newMedecin.id_titre"
+                              required autocomplete="off" class="form-control">
+                        <option value="">---</option>
+                        <option *ngFor="let titre of titres" [value]="titre._id" >{{titre.libelle_titre}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="label-bold">Service</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <select name="id_service" [(ngModel)]="newMedecin.id_service"
+                              required autocomplete="off" class="form-control">
+                        <option value="">---</option>
+                        <option *ngFor="let service of services" [value]="service._id" >{{service.libelle_service}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <label class="label-bold">Photo</label>
+                <div class="row bgc-gw border-no-radus-g" id="photo-content">
+                  <div class="col-12">
+                    <span class="fa fa-user-circle-o personne-img" id="default-personne" [ngClass]="default_class"></span>
+                    <img src="" id="add_personne_img" alt="FILE HERE!!!" [ngClass]="img_class">
+                    <input type="file" name="file" ng2FileSelect [uploader]="uploader" accept=".jpeg, .jpg" style="display: none" id="file" (change)="uploader.uploadAll(); fileChange($event)">
+                  </div>
+                  <div class="col-12">
+                    <button type="button" class="btn btn-secondary modal-bouton bottom" (click)="fileChooser('file')">
+                      <span class="fa fa-upload"></span> uploader</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" [disabled]="!medecinForm.valid || resquesting" mat-raised-button class="btn btn-primary modal-bouton">
+                <span class="fa fa-save"></span> Enregistrer</button>
+              <button type="button" class="btn btn-secondary modal-bouton" (click)="modalReference.close()">
+                <span class="fa fa-times-circle-o"></span> Annuler</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

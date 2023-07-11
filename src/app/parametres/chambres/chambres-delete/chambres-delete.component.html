@@ -1,0 +1,71 @@
+<div class="row">
+  <!--<div class="col-lg-12 remove-all-padding padding-top-sm padding-left-sm">
+    <span class="fa fa-pencil icon-fa font-bold color-g" title="modifier" (click)="open(editServiceModal)"></span>
+  </div>-->
+
+  <ng-template class="modal fade" #deleteChambreModal let-c="close" let-d="dismiss" data-backdrop="static" data-keyboard="false"
+               tabindex="-1" role="dialog" aria-labelledby="deleteChambreModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteChambreModalLongTitle">Supprimer une chambre</h5>
+          <span class="pull-right fa fa-window-close" (click)="modalReference.close()"></span>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="deleteChambreForm" (ngSubmit)="supprimerChambre(); ">
+            <div class="form-group">
+              <label class="label-bold">Code</label>
+              <div class="row">
+                <div class="col-12">
+                  <input formControlName="code_chambre" type="text"
+                         required autocomplete="off" class="form-control" disabled>
+
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="label-bold">Unit&eacute;</label>
+              <div class="row">
+                <div class="col-12">
+                  <select formControlName="id_unite"
+                          required autocomplete="off" class="form-control" disabled>
+                    <option value="">---</option>
+                    <option *ngFor="let une_unite of unites" [value]="une_unite._id" >{{une_unite.libelle_unite}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="label-bold">Nom</label>
+              <div class="row">
+                <div class="col-12">
+                  <input formControlName="libelle_chambre" type="text"
+                         required autocomplete="off" class="form-control" disabled>
+
+                </div>
+              </div>
+            </div>
+            <div class="form-group margin-bottom-md">
+              <label class="label-bold">Description</label>
+              <div class="row">
+                <div class="col-12">
+                  <textarea formControlName="desc_chambre" rows="6"
+                            autocomplete="off" class="form-control" disabled></textarea>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" [disabled]="!deleteChambreForm.valid || resquesting" mat-raised-button class="btn btn-primary modal-bouton">
+                <span class="fa fa-remove"></span> Supprimer</button>
+              <button type="button" class="btn btn-secondary modal-bouton" (click)="modalReference.close()">
+                <span class="fa fa-times-circle-o"></span> Annuler</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

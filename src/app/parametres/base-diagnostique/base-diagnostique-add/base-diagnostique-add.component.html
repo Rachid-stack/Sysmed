@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-lg-12 remove-all-padding padding-top-sm padding-left-sm">
+    Liste des cat&eacute;gories de pathologie&nbsp;&nbsp;<span class="fa fa-plus-circle icon-fa font-bold color-g" title="nouvelle base de diagnostique" (click)="open(addDiagnostiqueModal)"></span>
+  </div>
+
+
+  <ng-template class="modal fade" #addDiagnostiqueModal let-c="close" let-d="dismiss" data-backdrop="static" data-keyboard="false"
+               tabindex="-1" role="dialog" aria-labelledby="addDiagnostiqueModalLongTitle" aria-hidden="true" ngDraggable>
+    <div class="modal-dialog" role="document" ngDraggable>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addDiagnostiqueModalLongTitle">Ajouter une cat&eacute;gorie de pathologie</h5>
+          <span class="pull-right fa fa-window-close" (click)="modalReference.close()"></span>
+        </div>
+        <div class="modal-body">
+          <form #diagnostiqueForm="ngForm" (ngSubmit)="ajouterDiagnostique(); ">
+            <div class="form-group">
+              <label class="label-bold">Code</label>
+              <div class="row">
+                <div class="col-12">
+                  <input name="code_diagnostique" [(ngModel)]="newDiagnostique.code_diagnostique" type="text"
+                         required autocomplete="off" class="form-control">
+
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="label-bold">Cat&eacute;gorie</label>
+              <div class="row">
+                <div class="col-12">
+                  <input name="libelle_diagnostique" [(ngModel)]="newDiagnostique.libelle_diagnostique" type="text"
+                         required autocomplete="off" class="form-control">
+
+                </div>
+              </div>
+            </div>
+            <div class="form-group margin-bottom-md">
+              <label class="label-bold">Description</label>
+              <div class="row">
+                <div class="col-12">
+                  <textarea name="desc_diagnostique" [(ngModel)]="newDiagnostique.desc_diagnostique" rows="6"
+                            autocomplete="off" class="form-control"></textarea>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" [disabled]="!diagnostiqueForm.valid || resquesting" mat-raised-button class="btn btn-primary modal-bouton">
+                <span class="fa fa-save"></span> Enregistrer</button>
+              <button type="button" class="btn btn-secondary modal-bouton" (click)="modalReference.close()">
+                <span class="fa fa-times-circle-o"></span> Annuler</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

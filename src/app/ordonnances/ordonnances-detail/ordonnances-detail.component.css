@@ -1,0 +1,15 @@
+.pagination-div {
+    background-color: #EAEAEA;
+    padding-left: 10px;
+    padding-top: 0;
+    margin-bottom: 10px;
+    text-align: right!important;
+}
+
+.my-pagination /deep/ .ngx-pagination .current {
+    background: darkgray;
+}
+
+.my-pagination /deep/ .ngx-pagination {
+    margin-bottom: 2px;
+}

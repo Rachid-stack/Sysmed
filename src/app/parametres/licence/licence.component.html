@@ -1,0 +1,154 @@
+<div class="row remove-all-space">
+  <div class="col-12 remove-all-padding">Param&egrave;tres : <span class="font-bold">Licence et utilisation</span></div>
+  <div class="col-12 bgc-gw padding-top-sm padding-bottom-sm"><span class="font-bold">Informations client</span></div>
+  <form [formGroup]="licenceForm" (ngSubmit)="saveLicence();" class="margin-l-r">
+    <div class="row">
+      <div class="col-6 bgc-w padding-bottom-md">
+        <div class="form-group">
+          <label class="label-bold">Raison sociale</label>
+          <div class="row">
+            <div class="col-12">
+              <input formControlName="raison_sociale" type="text"
+                     required autocomplete="off" class="form-control">
+
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="label-bold">Adresse</label>
+          <div class="row">
+            <div class="col-12">
+              <textarea formControlName="adresse" rows="2"
+                        autocomplete="off" class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+        <label class="label-bold">T&eacute;l&eacute;phone</label>
+        <div class="row">
+          <div class="col-12">
+            <input formControlName="telephone" type="text"
+                   required autocomplete="off" class="form-control">
+
+          </div>
+        </div>
+      </div>
+        <div class="form-group">
+          <label class="label-bold">Fax</label>
+          <div class="row">
+          <div class="col-12">
+            <input formControlName="faxe" type="text"
+                   required autocomplete="off" class="form-control">
+
+          </div>
+        </div>
+        </div>
+        <div class="form-group">
+        <label class="label-bold">E-Mail</label>
+        <div class="row">
+          <div class="col-12">
+            <input formControlName="email" type="text"
+                   required autocomplete="off" class="form-control">
+
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="col-6 bgc-w padding-bottom-md padding-top-mdr logo-area">
+        <fieldset class="fieldset">
+          <legend>Logo</legend>
+          <img src="" id="licence_img" alt="FILE HERE!!!" [ngClass]="img_class">
+          <input type="file" name="file" ng2FileSelect [uploader]="uploader" accept=".jpeg, .jpg" style="display: none" id="file" (change)="uploader.uploadAll(); fileChange($event)">
+        </fieldset>
+        <div class="row remove-all-space">
+          <div class="col-12 bgc-w padding-top-sm padding-bottom-md text-align-r">
+            <button class="btn bgc-g color-w fa fa-upload font-bold padding-top-sm padding-bottom-sm" (click)="fileChooser('file')"> Modifier</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 bgc-gw padding-top-sm padding-bottom-sm"><span class="font-bold">Licence</span></div>
+      <div class="col-2 bgc-w padding-bottom-sm">
+        <div class="form-group">
+          <label class="label-bold">Nombre d'utilisateurs</label>
+          <div class="row">
+            <div class="col-12">
+              <input formControlName="nbr_user" type="number"
+                     required autocomplete="off" class="form-control">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 bgc-w padding-bottom-sm">
+        <div class="form-group">
+          <label class="label-bold">Licence</label>
+          <div class="row">
+            <div class="col-12">
+              <select formControlName="type_licence"
+                      required autocomplete="off" class="form-control">
+                <option value="">---</option>
+                <option *ngFor="let tlicence of tlicences" [value]="tlicence._id" >{{tlicence.libelle_tlicence}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 bgc-w padding-bottom-sm">
+        <div class="form-group">
+          <label class="label-bold">Date de debut</label>
+          <div class="row">
+            <div class="col-12">
+              <input formControlName="start_date" type="date"
+                     required autocomplete="off" class="form-control">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 bgc-w padding-bottom-sm">
+        <div class="form-group">
+          <label class="label-bold">Date de fin</label>
+          <div class="row">
+            <div class="col-12">
+              <input formControlName="end_date" type="date"
+                     autocomplete="off" class="form-control">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 bgc-w padding-bottom-sm text-align-r">
+        <div class="form-group">
+          <!--<label class="label-bold"></label>-->
+          <div class="row padding-top-md">
+            <div class="col-12 padding-top-sm">
+              <button type="submit" [disabled]="!licenceForm.valid || requesting" class="btn bgc-g color-w fa fa-save font-bold padding-top-sm padding-bottom-sm"> Enregistrer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="col-12 bgc-gw padding-top-lt padding-bottom-lt"><span class="font-bold">Version</span></div>
+  <div class="col-4 bgc-w padding-bottom-md">
+    <span>Version</span><br><span class="font-bold">1.0.0</span>
+  </div>
+  <div class="col-8 bgc-w padding-bottom-md">
+    <span>Derni&egrave;re mise &agrave; jour</span><br><span class="font-bold">18/09/2019 &agrave; 15h32</span>
+  </div>
+  <div class="col-12 bgc-gw padding-top-lt padding-bottom-lt"><span class="font-bold">Condition d'utilisation</span></div>
+  <div class="col-12 bgc-w padding-bottom-md">
+    La Parole de Dieu en Moor&eacute;, Jula, San, Dagara... disponible en ligne!
+
+    En plus de la Bible Version Parole de Vie (PDV) t&eacute;l&eacute;chargble sur Youversion, l'Alliance Biblique met &agrave; votre disposition le Nouveau Testament dans nos langues maternelles: Moor&eacute;, Jula, gulmancema, Dagara, San, Bissa... sur le site Bible.is et Hosana.
+    Vous pourrez y lire, &eacute;couter ou t&eacute;l&eacute;charger la Parole de Dieu dans votre langue maternelle.
+
+    Gr&acirc;ce &agrave; notre partenariat avec Youversion, vous avez avez acc&egrave;s gratuitement en ligne &agrave; toutes ces ressources biblique &agrave; partir du Burkina Faso pour votre &eacute;dification.
+
+    N'h&eacute;stez pas &agrave; nous contacter pour plus d'informations :
+    - A notre si&egrave;ge &agrave; Ouaga 2000, cot&eacute; Est de l'ONI. Tel: 25 37 47 31/78 40 25 80
+    - A notre Agence de vente &agrave; la Cit&eacute; An III, Tel: 78 80 11 18
+    -A notre Agence de vente &agrave; Bobo Dioulasso, Tel: 78 72 51 06
+  </div>
+</div>

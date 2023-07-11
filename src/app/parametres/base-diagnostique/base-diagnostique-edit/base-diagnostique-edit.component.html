@@ -1,0 +1,57 @@
+<div class="row">
+  <ng-template class="modal fade" #editDiagnostiqueModal let-c="close" let-d="dismiss" data-backdrop="static" data-keyboard="false"
+               tabindex="-1" role="dialog" aria-labelledby="editDiagnostiqueModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editDiagnostiqueModalLongTitle">Modifier une cat&eacute;gorie de pathologie</h5>
+          <span class="pull-right fa fa-window-close" (click)="modalReference.close()"></span>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="editDiagnostiqueForm" (ngSubmit)="modifierDiagnostique(); ">
+            <div class="form-group">
+              <label class="label-bold">Code</label>
+              <div class="row">
+                <div class="col-12">
+                  <input formControlName="code_diagnostique" type="text"
+                         required autocomplete="off" class="form-control">
+
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="label-bold">Cat&eacute;gorie</label>
+              <div class="row">
+                <div class="col-12">
+                  <input formControlName="libelle_diagnostique" type="text"
+                         required autocomplete="off" class="form-control">
+
+                </div>
+              </div>
+            </div>
+            <div class="form-group margin-bottom-md">
+              <label class="label-bold">Description</label>
+              <div class="row">
+                <div class="col-12">
+                  <textarea name="edit-diagnostique" formControlName="desc_diagnostique" rows="6"
+                            autocomplete="off" class="form-control"></textarea>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" [disabled]="!editDiagnostiqueForm.valid || resquesting" mat-raised-button class="btn btn-primary modal-bouton">
+                <span class="fa fa-save"></span> Enregistrer</button>
+              <button type="button" mat-raised-button class="btn btn-primary modal-bouton" (click)="supprimerDiagnostique()">
+                <span class="fa fa-trash"></span> Supprimer</button>
+              <button type="button" class="btn btn-secondary modal-bouton" (click)="modalReference.close()">
+                <span class="fa fa-times-circle-o"></span> Annuler</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-lg-12 remove-all-padding padding-top-sm padding-left-sm">
+    Liste des chambres&nbsp;&nbsp;<span class="fa fa-plus-circle icon-fa font-bold color-g" title="nouvelle chambre" (click)="open(addChambreModal)"></span>
+  </div>
+
+
+  <ng-template class="modal fade" #addChambreModal let-c="close" let-d="dismiss" data-backdrop="static" data-keyboard="false"
+               tabindex="-1" role="dialog" aria-labelledby="addChambreModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addChambreModalLongTitle">Ajouter une chambre</h5>
+          <span class="pull-right fa fa-window-close" (click)="modalReference.close()"></span>
+        </div>
+        <div class="modal-body">
+          <form #chambreForm="ngForm" (ngSubmit)="ajouterChambre(); ">
+            <div class="form-group">
+              <label class="label-bold">Code</label>
+              <div class="row">
+                <div class="col-12">
+                  <input name="code_chambre" [(ngModel)]="newChambre.code_chambre" type="text"
+                         required autocomplete="off" class="form-control">
+
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="label-bold">Unit&eacute;</label>
+              <div class="row">
+                <div class="col-12">
+                  <select name="id_unite" [(ngModel)]="newChambre.id_unite"
+                          required autocomplete="off" class="form-control">
+                    <option value="">---</option>
+                    <option *ngFor="let une_unite of unites" [value]="une_unite._id" >{{une_unite.libelle_unite}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="label-bold">Nom</label>
+              <div class="row">
+                <div class="col-12">
+                  <input name="libelle_chambre" [(ngModel)]="newChambre.libelle_chambre" type="text"
+                         required autocomplete="off" class="form-control">
+
+                </div>
+              </div>
+            </div>
+            <div class="form-group margin-bottom-md">
+              <div class="row remove-all-space">
+                <div class="col-12 remove-all-padding">
+                  <span class="font-bold">&Eacute;quipements disponibles</span><br>
+                  Choisissez les &eacute;quipements.
+                </div>
+              </div>
+              <div class="row remove-all-space bgc-gw border-no-radus-g padding-lt">
+                <label  *ngFor="let equipement of equipements" class="match-tiers-content">
+                  <input [name]="equipement.code" type="checkbox" class="checkbox" [id]="equipement._id" (click)="addRemoveData(equipement)"> {{equipement.libelle_equipement}}
+                </label>
+              </div>
+            </div>
+            <div class="form-group margin-bottom-md">
+              <label class="label-bold">Description</label>
+              <div class="row">
+                <div class="col-12">
+                  <textarea name="desc_chambre" [(ngModel)]="newChambre.desc_chambre" rows="6"
+                            autocomplete="off" class="form-control"></textarea>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" [disabled]="!chambreForm.valid || resquesting" mat-raised-button class="btn btn-primary modal-bouton">
+                <span class="fa fa-save"></span> Enregistrer</button>
+              <button type="button" class="btn btn-secondary modal-bouton" (click)="modalReference.close()">
+                <span class="fa fa-times-circle-o"></span> Annuler</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

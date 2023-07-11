@@ -1,0 +1,15 @@
+.border-b-red-l {
+    border-bottom: solid red 4px;
+}
+
+.img-head {
+    width: 180px;
+    height: 50px;
+    padding-right: 2px;
+    margin-left: 1px;
+    border-right: solid lightgray 1px;
+}
+
+select.head-chx {
+    border: 0px!important;
+}

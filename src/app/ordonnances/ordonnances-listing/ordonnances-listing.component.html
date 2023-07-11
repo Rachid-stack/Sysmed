@@ -1,0 +1,57 @@
+<div class="row remove-all-space">
+  <div class="col-12 remove-all-padding">Ordonnances : <span class="font-bold">Liste des ordonnances</span></div>
+  <div class="col-12 bgc-w padding-sm"><input type="text" id="ordonnance-search" class="form-control" placeholder="Nom, Pr&eacute;noms, num&eacute;ro ..."></div>
+
+  <div class="col-12 remove-all-padding">
+    <app-ordonnances-add></app-ordonnances-add>
+    <app-ordonnances-edit></app-ordonnances-edit>
+
+    <table *ngIf="ordonnances && ordonnances.length != 0" class="table table-borderless table-striped table-hover">
+      <tr *ngFor="let editOrdonnance of ordonnances |paginate:{itemsPerPage:itemsPerPage,currentPage:p}" >
+        <td width="3%">
+          <br>
+          <input type="radio" name="ordonnanceChoix" class="class-checkbox cursor-pointer" (click)="choiseOrdonnance(editOrdonnance._id)">
+        </td>
+        <td width="15%">
+          <span>Num&eacute;ro</span> <br>
+          <span><strong>{{editOrdonnance.code_ordonnance}}</strong></span>
+        </td>
+        <td width="16%">
+          <span>Date</span> <br>
+          <span><strong>{{editOrdonnance.create_date | date:'dd/MM/yyyy'}}</strong></span>
+        </td>
+        <td width="14%">
+          <span>N&deg; patient</span> <br>
+          <span *ngFor="let patient of patients"><strong *ngIf="patient._id == editOrdonnance.id_patient">{{patient.code_patient}}</strong></span>
+        </td>
+        <td width="20%">
+          <span>Patient</span> <br>
+          <span *ngFor="let patient of patients"><strong *ngIf="patient._id == editOrdonnance.id_patient">{{patient.nom_prenom}}</strong></span>
+        </td>
+        <td width="20%">
+          <span>M&eacute;decin</span> <br>
+          <span><strong>{{editOrdonnance.medecin}}</strong></span>
+        </td>
+        <td width="12%">
+          <br>
+          <span class="fa fa-file-pdf-o icon-fa font-bold color-g" title="fiche" (click)="openFiche(editOrdonnance._id)"></span>&nbsp;&nbsp;&nbsp;
+          <span class="fa fa-pencil icon-fa font-bold color-g" title="modifier" (click)="openEdit(editOrdonnance._id)"></span>
+        </td>
+      </tr>
+    </table>
+    <div *ngIf="ordonnances && ordonnances.length != 0" class="pagination-div">
+      <div class="row ">
+        <div class="col-lg-6"> <!--page {{p}} sur {{totalPage}} (totale: {{total}})--> </div>
+        <div class="col-lg-6 pull-right">
+          <pagination-controls (pageChange)="p = $event" class=my-pagination></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!ordonnances || ordonnances.length == 0" class="bgc-w padding-sm color-gl font-bold">
+      <i>Aucune ordonnance trouv&eacute;e !!!</i>
+    </div>
+  </div>
+  <div class="col-12 remove-all-padding">
+    <app-ordonnances-detail></app-ordonnances-detail>
+  </div>
+</div>

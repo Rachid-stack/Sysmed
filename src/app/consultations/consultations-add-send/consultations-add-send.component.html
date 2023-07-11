@@ -1,0 +1,131 @@
+<div class="row">
+  <ng-template class="modal fade" #addConsultationSendModal let-c="close" let-d="dismiss" data-backdrop="static" data-keyboard="false"
+               tabindex="-1" role="dialog" aria-labelledby="addConsultationSendModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content remove-all-padding">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addConsultationSendModalLongTitle">Transferer une consultation</h5>
+          <span class="pull-right fa fa-window-close" (click)="modalReference.close()"></span>
+        </div>
+        <div class="modal-body remove-bottom-padding">
+          <form #consultationSendForm="ngForm" (ngSubmit)="ajouterConsultationSend(); ">
+            <div class="row remove-all-space margin-bottom-md">
+              <div class="col-5 remove-all-space padding-right-sm">
+                <div class="form-group">
+                  <label>Date de transfert</label>
+                  <div class="row">
+                    <div class="col-8">
+                      <input type="date" name="date_transfert" [(ngModel)]="newCTransfert.date_transfert"
+                             autocomplete="off" class="form-control">
+                    </div>
+                    <div class="col-4">
+
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Med&eacute;cin traitant</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <select name="id_medecin" [(ngModel)]="newCTransfert.id_medecin"
+                              required autocomplete="off" class="form-control">
+                        <option value="">---</option>
+                        <option *ngFor="let medecin of medecins" [value]="medecin.id" >{{medecin.nom}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Note au dossier</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <textarea name="note" [(ngModel)]="newCTransfert.note" rows="6"
+                                autocomplete="off" class="form-control"></textarea>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-7 remove-all-space">
+                <label>Patient</label>
+                <div class="row remove-all-space bgc-gw border-no-radus-g padding-lt">
+                  <div class="col-9 remove-all-space">
+                    <div class="row remove-all-space">
+                      <div class="col-8">
+                        <div class="form-group">
+                          <label class="label-bold">N&deg;Patient</label>
+                          <div class="row">
+                            <div class="col-12">
+                              <input name="code_patient" [(ngModel)]="code_patient" type="text"
+                                     class="form-control" disabled>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="form-group">
+                          <label></label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row remove-all-space">
+                      <div class="col-12">
+                        <div class="form-group">
+                          <label class="label-bold">Nom & pr&eacute;nom</label>
+                          <div class="row">
+                            <div class="col-12">
+                              <input name="nom" [(ngModel)]="nom" type="text" class="form-control" disabled>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="row bgc-gw remove-all-space" id="photo-content">
+                      <div class="col-12 remove-all-space">
+                        <span class="fa fa-user-circle-o personne-img" id="default-personne" [ngClass]="default_class"></span>
+                        <img src="" id="add_personne_img" alt="FILE HERE!!!" [ngClass]="img_class">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <label class="margin-top-md">Historique des transferts</label>
+                <table class="table table-borderless table-striped min-h">
+                  <tbody *ngIf="transferts && transferts.length != 0">
+                    <tr *ngFor="let transfert of transferts">
+                      <td>
+                        <span>date</span><br>
+                        <span class="font-bold">{{ transfert.date_transfert | date:'dd/MM/yyyy' }}</span>
+                      </td>
+                      <td>
+                        <span>Med&eacute;cin</span><br>
+                        <span *ngFor="let tmedecin of medecins">
+                          <span class="font-bold" *ngIf="transfert.id_medecin == tmedecin.id">{{ tmedecin.nom }}</span>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody *ngIf="!transferts || transferts.length == 0">
+                    <tr>
+                      <td colspan="2">
+                        <span class="font-bold">Aucune donn&eacute;e trouv&eacute;e !!!</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" [disabled]="!consultationSendForm.valid || resquesting" mat-raised-button class="btn btn-primary modal-bouton">
+                <span class="fa fa-save"></span> Enregistrer</button>
+              <button type="button" class="btn btn-secondary modal-bouton" (click)="modalReference.close()">
+                <span class="fa fa-times-circle-o"></span> Annuler</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

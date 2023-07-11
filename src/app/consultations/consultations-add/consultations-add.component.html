@@ -1,0 +1,266 @@
+<div class="row">
+  <div class="col-lg-12 remove-all-padding padding-top-sm padding-left-sm" *ngIf="showTitle">
+    Liste des consultations&nbsp;&nbsp;<span class="fa fa-plus-circle icon-fa font-bold color-g" title="nouveau consultation" (click)="open(addConsultationModal)"></span>
+  </div>
+  <app-patients-choose (curentPatient)="setPatient($event);"></app-patients-choose>
+
+
+  <ng-template class="modal fade" #addConsultationModal let-c="close" let-d="dismiss" data-backdrop="static" data-keyboard="false"
+               tabindex="-1" role="dialog" aria-labelledby="addConsultationModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content remove-all-padding">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addConsultationModalLongTitle">Ajouter une consultation</h5>
+          <span class="pull-right fa fa-window-close" (click)="modalReference.close()"></span>
+        </div>
+        <div class="modal-body remove-bottom-padding">
+          <form #consultationForm="ngForm" (ngSubmit)="ajouterConsultation(); ">
+            <label class="label-bold">Patient <span class="fa fa-search patient-select" title="choisir un patient" (click)="choosePatient()" *ngIf="showTitle"></span></label>
+            <div class="row remove-all-space bgc-gw border-no-radus-g padding-lt">
+              <div class="col-9 remove-all-space">
+                <div class="row remove-all-space">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="label-bold">N&deg;Patient</label>
+                      <div class="row">
+                        <div class="col-12">
+                          <input name="code_patient" [(ngModel)]="code_patient" type="text"
+                                 class="form-control" disabled>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <!--<label class="label-bold">Pr&eacute;nom(s)</label>
+                      <div class="row">
+                        <div class="col-12">
+                          <input name="prenom_pers" [(ngModel)]="newPersonne.prenom_pers" type="text"
+                                 autocomplete="off" class="form-control">
+
+                        </div>
+                      </div>-->
+                    </div>
+                  </div>
+                </div>
+                <div class="row remove-all-space">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="label-bold">Nom</label>
+                      <div class="row">
+                        <div class="col-12">
+                          <input name="nom" [(ngModel)]="nom" type="text" class="form-control" disabled>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="label-bold">Pr&eacute;noms</label>
+                      <div class="row">
+                        <div class="col-12">
+                          <input name="prenom" [(ngModel)]="prenom" type="text" class="form-control" disabled>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row bgc-gw remove-all-space" id="photo-content">
+                  <div class="col-12 remove-all-space">
+                    <span class="fa fa-user-circle-o personne-img" id="default-personne" [ngClass]="default_class"></span>
+                    <img src="" id="add_personne_img" alt="FILE HERE!!!" [ngClass]="img_class">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row remove-all-space margin-top-md margin-bottom-md">
+              <div class="col-2 remove-all-space padding-right-sm">
+                <div class="form-group">
+                  <label class="label-bold">Sp&eacute;cialit&eacute;</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <select name="id_specialite" [(ngModel)]="newConsultation.id_specialite"
+                              required autocomplete="off" class="form-control">
+                        <option value="">---</option>
+                        <option *ngFor="let specialite of specialites" [value]="specialite._id" >{{specialite.libelle_spe}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 remove-all-space padding-right-sm">
+                <div class="form-group">
+                  <label class="label-bold">Code consultation</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="code_consultation" [(ngModel)]="newConsultation.code_consultation"
+                              required autocomplete="off" class="form-control" type="text" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4 remove-all-space padding-right-sm">
+                <div class="form-group">
+                  <label class="label-bold">Lib&eacute;ll&eacute; consultation</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="libelle_consultation" [(ngModel)]="newConsultation.libelle_consultation" type="text"
+                             required autocomplete="off" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 remove-all-space">
+                <div class="form-group">
+                  <label class="label-bold">Date consultation</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="date_consultation" [(ngModel)]="newConsultation.date_consultation" type="date"
+                             required autocomplete="off" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row remove-all-space margin-bottom-md">
+              <div class="col-6 remove-all-space padding-right-sm">
+                <label class="label-bold">Motifs<br><span class="font-w-n">Choisissez le/les motifs de la consultation</span></label>
+                <div class="row remove-all-space bgc-gw border-no-radus-g padding-lt">
+                  <label  *ngFor="let motif of motifs" class="match-semi-content">
+                    <input [name]="motif.code_cmotif" type="checkbox" class="checkbox" [id]="motif._id" (click)="addRemoveData(motif)"> {{motif.libelle_cmotif}}
+                  </label>
+                </div>
+              </div>
+              <div class="col-6 remove-all-space">
+                <div class="form-group">
+                  <label class="label-bold">Remarques<br><span class="font-w-n">Autres commentaires sur la consultation</span></label>
+                  <div class="row">
+                    <div class="col-12">
+                      <textarea name="commentaire_consultation" [(ngModel)]="newConsultation.commentaire_consultation" rows="3"
+                                autocomplete="off" class="form-control"></textarea>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <label class="label-bold">Param&egrave;tres g&eacute;n&eacute;raux<br><span class="font-w-n">Param&egrave;tres biologiques lors de la consultation</span></label>
+            <div class="row remove-all-space margin-bottom-md bgc-gw border-no-radus-g padding-lt">
+              <div class="col-3 remove-all-space padding-right-sm">
+                <div class="form-group">
+                  <label class="label-bold">Taille</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="taille" [(ngModel)]="newReleve.taille" type="number"
+                              autocomplete="off" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 remove-all-space padding-right-sm">
+                <div class="form-group">
+                  <label class="label-bold">Poids</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="poids" [(ngModel)]="newReleve.poids" type="number"
+                             autocomplete="off" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 remove-all-space padding-right-sm">
+                <div class="form-group">
+                  <label class="label-bold">IMC</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="imc" [(ngModel)]="newReleve.imc" type="number"
+                             autocomplete="off" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 remove-all-space">
+                <div class="form-group">
+                  <label class="label-bold">Surface corporelle</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="sc" [(ngModel)]="newReleve.sc" type="number"
+                             autocomplete="off" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 remove-all-space padding-right-sm">
+                <div class="form-group">
+                  <label class="label-bold">Temperature</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="temperature" [(ngModel)]="newReleve.temperature" type="number"
+                             autocomplete="off" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 remove-all-space padding-right-sm">
+                <div class="form-group">
+                  <label class="label-bold">Pouls</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="pouls" [(ngModel)]="newReleve.pouls" type="number"
+                             autocomplete="off" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 remove-all-space padding-right-sm">
+                <div class="form-group">
+                  <label class="label-bold">TAD</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="tad" [(ngModel)]="newReleve.tad" type="number"
+                             autocomplete="off" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 remove-all-space">
+                <div class="form-group">
+                  <label class="label-bold">TAS</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input name="tas" [(ngModel)]="newReleve.tas" type="number"
+                             autocomplete="off" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group margin-bottom-md">
+              <label class="label-bold">Diagnostic</label>
+              <div class="row">
+                <div class="col-12">
+                  <textarea name="resultat_consultation" [(ngModel)]="newConsultation.resultat_consultation" rows="6"
+                            autocomplete="off" class="form-control"></textarea>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" [disabled]="!consultationForm.valid || resquesting" mat-raised-button class="btn btn-primary modal-bouton">
+                <span class="fa fa-save"></span> Enregistrer</button>
+              <button type="button" class="btn btn-secondary modal-bouton" (click)="modalReference.close()">
+                <span class="fa fa-times-circle-o"></span> Annuler</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,137 @@
+/*
+.menu-left{
+    /!* width: 250px; *!/
+    background-color:#fff;
+    color: #6c6c70;
+    /!* font-size: 1.1em; *!/
+    display: block;
+}
+
+.main-menu {
+    background-color: white;;
+    margin-left: -41px;
+}
+ul.sous-menu {
+    background-color: #f6f6f6;
+    margin-left: -25px;
+}
+
+ul.sous-menu > li > a {
+    padding: 10px;
+    display: block;
+    text-align: left;
+    /!* font-size: 1.1em; *!/
+}
+
+.menu-left > ul > li >a {
+    padding: 10px 25px 10px 18px;
+    display: block;
+    text-align: left;
+    text-decoration: none;
+    /!* font-size: 1.1em; *!/
+}
+
+.menu-left ul li a:hover {
+    background-color: rgba(223, 235, 223, 1);
+    font-weight: 700;
+    border-left: solid 5px rgb(0, 150, 71);
+}
+
+.menu-left ul li a.active {
+    background-color: rgba(223, 235, 223, 1);
+    font-weight: 700;
+    border-left: solid 0px rgb(0, 150, 71);
+}
+
+ul,li,a {
+    list-style: none;
+    color:#6c6c70;
+}*/
+
+
+
+li {
+
+    padding-top: 0;
+    padding-bottom: 1px;
+    margin-bottom: 10px;;
+}
+
+a {
+    color: #6c6c70;
+    font-size: 16px;
+    padding-left: 5px;
+    cursor: pointer;
+    text-decoration: none;;
+}
+
+.active {
+    background-color: rgba(223, 235, 223, 1);
+    border-left: solid 0px rgb(0, 150, 71);
+}
+
+.menu-div > ul > li.active:hover {
+    /*background: #FFEFD4;
+    border-left: solid 4px #6c6c70;
+    color: #faa52c;*/
+    background-color: rgba(223, 235, 223, 1);
+    border-left: solid 0px rgb(0, 150, 71);
+}
+
+.menu-div {
+    background: white;
+}
+
+.menu-div > ul > li:hover {
+    background-color: rgba(223, 235, 223, 1);
+    font-weight: 700;
+    border-left: solid 5px rgb(0, 150, 71);
+}
+
+.menu-div > ul > li:hover > div > ul > li {
+    background-color: #EAEAEA;
+    font-weight: normal;
+    border-left: solid 0px rgb(0, 150, 71);
+}
+
+.menu-div > ul > li.active > div > ul > li:hover {
+    font-weight: 700;
+}
+
+ul.sub-menu {
+    background: #EAEAEA;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    line-height: 35px;
+}
+
+.nav {
+    width: 100%;
+}
+
+/*Menu*/
+
+ul.sub-menu {
+    background: #EAEAEA;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    line-height: 35px;
+}
+
+ul.sub-menu li a {
+    display: block;
+    border: none;
+    padding-left: 20px;
+}
+
+ul.sub-menu li a:hover, ul.sub-menu li a.active {
+    /*font-weight: bold;*/
+    background: none;
+    border: none;
+}
+
+ul.sub-menu li a.active {
+    /*background: #CCC;*/
+}

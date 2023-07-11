@@ -1,0 +1,162 @@
+<div class="row">
+  <div class="col-lg-12 remove-all-padding padding-top-sm padding-left-sm">
+    Liste des ordonnances&nbsp;&nbsp;<span class="fa fa-plus-circle icon-fa font-bold color-g" title="nouvelle ordonnance" (click)="open(addOrdonnanceModal)"></span>
+  </div>
+  <app-patients-choose (curentPatient)="setPatient($event);"></app-patients-choose>
+
+
+  <ng-template class="modal fade" #addOrdonnanceModal let-c="close" let-d="dismiss" data-backdrop="static" data-keyboard="false"
+               tabindex="-1" role="dialog" aria-labelledby="addOrdonnanceModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content remove-all-padding">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addOrdonnanceModalLongTitle">Ajouter une ordonnance</h5>
+          <span class="pull-right fa fa-window-close" (click)="modalReference.close()"></span>
+        </div>
+        <div class="modal-body remove-bottom-padding">
+          <form [formGroup]="ordonnanceForm" (ngSubmit)="ajouterOrdonnance(); ">
+            <label class="label-bold">Patient <span class="fa fa-search patient-select" title="choisir un patient" (click)="choosePatient()" *ngIf="showTitle"></span></label>
+            <div class="row remove-all-space bgc-gw border-no-radus-g padding-lt">
+              <div class="col-9 remove-all-space">
+                <div class="row remove-all-space">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="label-bold">N&deg;Patient</label>
+                      <div class="row">
+                        <div class="col-12">
+                          <input formControlName="code_patient" type="text"
+                                 class="form-control" disabled>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+
+                    </div>
+                  </div>
+                </div>
+                <div class="row remove-all-space">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="label-bold">Nom</label>
+                      <div class="row">
+                        <div class="col-12">
+                          <input formControlName="nom" type="text"
+                                 class="form-control" disabled>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="label-bold">Pr&eacute;noms</label>
+                      <div class="row">
+                        <div class="col-12">
+                          <input formControlName="prenom" type="text"
+                                 class="form-control" disabled>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row bgc-gw remove-all-space" id="photo-content">
+                  <div class="col-12 remove-all-space">
+                    <span class="fa fa-user-circle-o personne-img" id="default-personne" [ngClass]="default_class"></span>
+                    <img src="" id="add_personne_img" alt="FILE HERE!!!" [ngClass]="img_class">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <label class="label-bold padding-top-md">Titre & prescripteur</label>
+            <div class="row remove-all-space bgc-gw border-no-radus-g padding-lt">
+              <div class="col-12">
+                <div class="form-group">
+                  <label class="label-bold">Titre</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input formControlName="titre" type="text"
+                             class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-7">
+                <div class="form-group">
+                  <label class="label-bold">Prescripteur <span class="fa fa-search prescripteur-select" title="choisir un prescripteur" (click)="choosePrescripteur()" *ngIf="showTitle"></span></label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input formControlName="prescripteur" type="text" class="form-control" disabled>
+                      <!--<select name="id_medecin" [(ngModel)]="newOrdonnance.id_medecin"
+                              required autocomplete="off" class="form-control">
+                        <option value="">-&#45;&#45;</option>
+                        <option *ngFor="let medecin of medecins" [value]="medecin._id" >{{medecin.nom}}</option>
+                      </select>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-5">
+                <div class="form-group">
+
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="label-bold">
+                    <input formControlName="is_confidential" type="checkbox"
+                           class="checkbox"> Confidentiel ?
+                  </label>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+
+                </div>
+              </div>
+            </div>
+
+            <label class="label-bold padding-top-md">
+              M&eacute;dicaments <span class="fa fa-plus-circle patient-select" title="ajouter un m&eacute;dicament" (click)="addLineMedicament()"></span><br>
+              <span class="font-weight-normal">choisissez le/les m&eacute;dicaments et les posologies associ&eacute;es</span>
+            </label>
+            <div class="row remove-all-space border-no-radus-l padding-lt margin-bottom-md">
+              <datalist id="list_medicament">
+                <option value="">---</option>
+                <option *ngFor="let medicament of medicaments" [value]="medicament.nom_comercial" >{{medicament.nom_comercia}}</option>
+              </datalist>
+              <div class="col-12" formArrayName="line_medicaments">
+                <div class="row remove-all-space" *ngFor="let line of lineMedicaments.controls; let lineIndex=index" [formGroupName]="lineIndex">
+                  <div class="col-5 padding-top-lt padding-bottom-lt">
+                    <input list="list_medicament" formControlName="medicament" type="text"  placeholder="médicament"
+                          class="form-control">
+                  </div>
+                  <div class="col-3 padding-top-lt padding-bottom-lt">
+                    <input formControlName="quantite" type="text" placeholder="quantité" class="form-control">
+                  </div>
+                  <div class="col-3 padding-top-lt padding-bottom-lt">
+                    <input formControlName="posologie" type="text" placeholder="posologie" class="form-control">
+                  </div>
+                  <div class="col-1 padding-top-lt padding-bottom-lt">
+                    <span class="fa fa-trash" title="retirer la ligne" (click)="removeLineMedicament(lineIndex)"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" [disabled]="!ordonnanceForm.valid || resquesting" mat-raised-button class="btn btn-primary modal-bouton">
+                <span class="fa fa-save"></span> Enregistrer</button>
+              <button type="button" class="btn btn-secondary modal-bouton" (click)="modalReference.close()">
+                <span class="fa fa-times-circle-o"></span> Annuler</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

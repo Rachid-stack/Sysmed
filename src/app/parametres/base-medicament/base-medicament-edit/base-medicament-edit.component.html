@@ -1,0 +1,139 @@
+<div class="row">
+  <ng-template class="modal fade" #editBMedicamentModal let-c="close" let-d="dismiss" data-backdrop="static" data-keyboard="false"
+               tabindex="-1" role="dialog" aria-labelledby="editBMedicamentModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editBMedicamentModalLongTitle">Modifier un m&eacute;dicament</h5>
+          <span class="pull-right fa fa-window-close" (click)="modalReference.close()"></span>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="editBMedicamentForm" (ngSubmit)="modifierBMedicament(); ">
+            <div class="form-group">
+              <label class="label-bold">Code</label>
+              <div class="row">
+                <div class="col-12">
+                  <input formControlName="code_med" type="text"
+                         required autocomplete="off" class="form-control">
+
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="label-bold">Nom comercial</label>
+              <div class="row">
+                <div class="col-12">
+                  <input formControlName="nom_comercial" type="text"
+                         required autocomplete="off" class="form-control">
+
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="label-bold">Nom g&eacute;n&eacute;rique (dci)</label>
+              <div class="row">
+                <div class="col-12">
+                  <input formControlName="nom_generique" type="text"
+                         required autocomplete="off" class="form-control">
+
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="label-bold">Dosage</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input formControlName="dosage_med" type="text"
+                             required autocomplete="off" class="form-control">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="label-bold">Forme pharmaceutique</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <select formControlName="form_pharma"
+                              required autocomplete="off" class="form-control">
+                        <option value="">---</option>
+                        <option *ngFor="let form_pharma of form_pharmas" [value]="form_pharma._id" >{{form_pharma.libelle_form_pharm}}</option>
+                      </select>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="label-bold">Voie d'administration</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <select formControlName="voie_admin"
+                              required autocomplete="off" class="form-control">
+                        <option value="">---</option>
+                        <option *ngFor="let voie_admin of voie_admins" [value]="voie_admin._id" >{{voie_admin.libelle_voie_admin}}</option>
+                      </select>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group margin-bottom-md">
+                  <label class="label-bold">Prix moyen</label>
+                  <div class="row">
+                    <div class="col-12">
+                      <input formControlName="prix_moyen" type="number"
+                             required autocomplete="off" class="form-control">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="label-bold">Laboratoire pharmaceutique</label>
+              <div class="row">
+                <div class="col-12">
+                  <select formControlName="labo_pharma"
+                          required autocomplete="off" class="form-control">
+                    <option value="">---</option>
+                    <option *ngFor="let labo of labos" [value]="labo._id" >{{labo.nom_labo}}</option>
+                  </select>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="label-bold">Est g&eacute;n&eacute;rique</label>
+              <div class="row">
+                <div class="col-12">
+                  <input formControlName="is_generic" type="checkbox" class="class-checkbox">
+
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" [disabled]="!editBMedicamentForm.valid || resquesting" mat-raised-button class="btn btn-primary modal-bouton">
+                <span class="fa fa-save"></span> Enregistrer</button>
+              <button type="button" mat-raised-button class="btn btn-primary modal-bouton" (click)="supprimerBMedicament()">
+                <span class="fa fa-trash"></span> Supprimer</button>
+              <button type="button" class="btn btn-secondary modal-bouton" (click)="modalReference.close()">
+                <span class="fa fa-times-circle-o"></span> Annuler</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

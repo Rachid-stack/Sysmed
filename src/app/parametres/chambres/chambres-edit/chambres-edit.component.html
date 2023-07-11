@@ -1,0 +1,82 @@
+<div class="row">
+  <ng-template class="modal fade" #editChambreModal let-c="close" let-d="dismiss" data-backdrop="static" data-keyboard="false"
+               tabindex="-1" role="dialog" aria-labelledby="editChambreModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editChambreModalLongTitle">Modifier une chambre</h5>
+          <span class="pull-right fa fa-window-close" (click)="modalReference.close()"></span>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="editChambreForm" (ngSubmit)="modifierChambre(); ">
+            <div class="form-group">
+              <label class="label-bold">Code</label>
+              <div class="row">
+                <div class="col-12">
+                  <input formControlName="code_chambre" type="text"
+                         required autocomplete="off" class="form-control">
+
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="label-bold">Unit&eacute;</label>
+              <div class="row">
+                <div class="col-12">
+                  <select formControlName="id_unite"
+                          required autocomplete="off" class="form-control">
+                    <option value="">---</option>
+                    <option *ngFor="let une_unite of unites" [value]="une_unite._id" >{{une_unite.libelle_unite}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="label-bold">Nom</label>
+              <div class="row">
+                <div class="col-12">
+                  <input name="edit-chambre" formControlName="libelle_chambre" type="text"
+                         required autocomplete="off" class="form-control">
+
+                </div>
+              </div>
+            </div>
+            <div class="form-group margin-bottom-md">
+              <div class="row remove-all-space">
+                <div class="col-12 remove-all-padding">
+                  <span class="font-bold">&Eacute;quipements disponibles</span><br>
+                  Choisissez les &eacute;quipements.
+                </div>
+              </div>
+              <div class="row remove-all-space bgc-gw border-no-radus-g padding-lt">
+                <label  *ngFor="let equipement of equipements" class="match-tiers-content">
+                  <input [name]="equipement.code" type="checkbox" class="checkbox" [checked]="equipement.checked" (click)="addRemoveData(equipement)"> {{equipement.libelle_equipement}}
+                </label>
+              </div>
+            </div>
+            <div class="form-group margin-bottom-md">
+              <label class="label-bold">Description</label>
+              <div class="row">
+                <div class="col-12">
+                  <textarea name="edit-diagnostique" formControlName="desc_chambre" rows="6"
+                            autocomplete="off" class="form-control"></textarea>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" [disabled]="!editChambreForm.valid || resquesting" mat-raised-button class="btn btn-primary modal-bouton">
+                <span class="fa fa-save"></span> Enregistrer</button>
+              <button type="button" mat-raised-button class="btn btn-primary modal-bouton" (click)="supprimerChambre()">
+                <span class="fa fa-trash"></span> Supprimer</button>
+              <button type="button" class="btn btn-secondary modal-bouton" (click)="modalReference.close()">
+                <span class="fa fa-times-circle-o"></span> Annuler</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,86 @@
+/*
+POPUP STYLE*/
+.example-form {
+    /*min-width: 150px;
+    max-width: 500px;*/
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.example-full-width:nth-last-child() {
+    margin-bottom: 10px;
+}
+
+.button-row {
+    margin: 10px 0;
+}
+.justificativ-div,.paiement-div,.fournisseur-div{
+    background: #eeeeee;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+.row{
+    align-items: center;
+}
+.form-group {
+    margin-bottom: 5px;
+}
+.padding-row
+{
+    padding-left: 10px;
+}
+.modal-header{
+    background-color: #008000;
+    padding: 5px;
+    color: white;
+    align-items: center;
+    width: 100%;
+}
+
+.modal-body {
+    height: auto;
+    width: auto;
+}
+
+.fa{
+    color: white;
+    cursor: pointer;
+}
+.label-bold{
+    font-weight:bold;
+}
+.modal-bouton{
+    background-color:  #008000;
+    border:solid 1px #d3d3d3;
+    color: #FFFFFF;
+}
+button.btn.btn-primary.modal-bouton>span.fa,button.btn.btn-secondary.modal-bouton>span.fa{
+    color:#FFFFFF;
+
+}
+
+.btn-secondary {
+    color: #fff;
+    border-color:none;
+    background-color: #008000;
+}
+
+span.fa.fa-plus-circle{
+    color: #008000;
+}
+
+.modal-dialog {
+    width: auto;
+    height: auto;
+    margin: 0px;
+    panding: 5px;
+}
+.bouton-choose{
+    margin-top: 18px;margin-left: -29px;
+}
+
+/*
+END POPUP STYLE*/

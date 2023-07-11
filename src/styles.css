@@ -1,0 +1,217 @@
+/* You can add global styles to this file, and also import other style files */
+label {
+    font-size: 12pt!important;
+}
+
+body {
+    background-color: #EAEAEA;
+}
+
+.match-content {
+    width: 100%;
+}
+
+.match-semi-content {
+    width: 50%;
+}
+
+.match-tiers-content {
+    width: 33.333%;
+}
+
+.match-quarts-content {
+    width: 25%;
+}
+
+.body-bgc {
+    background-color: #EAEAEA;
+}
+
+.bgc-w {
+    background-color: #FFFFFF;
+}
+
+.bgc-g {
+    background-color: #008000;
+}
+
+.bgc-gw {
+    background-color: rgba(223, 235, 223, 1);
+}
+
+.border-no-radus-g {
+    border: solid 1px #008000;
+}
+
+.border-no-radus-ws {
+    border: solid 1px whitesmoke;
+}
+
+.margin-top-lg {
+    margin-top: 81px!important;
+}
+
+.margin-top-md {
+    margin-top: 15px!important;
+}
+
+.margin-rigth-lt {
+    margin-right: 5px;
+}
+
+.margin-bottom-md {
+    margin-bottom: 15px!important;
+}
+
+.remove-all-space {
+    margin: 0px;
+    padding: 0px;
+}
+
+.remove-all-padding {
+    padding: 0px;
+}
+
+.remove-bottom-padding {
+    padding-bottom: 0px;
+}
+
+.padding-sm {
+    padding: 10px;
+}
+
+.padding-lt {
+    padding: 5px;
+}
+
+.padding-top-lt {
+    padding-top: 5px;
+}
+
+.padding-top-md {
+    padding-top: 20px;
+}
+
+.padding-top-mdr {
+    padding-top: 15px;
+}
+
+.padding-bottom-md {
+    padding-bottom: 20px;
+}
+
+.padding-top-sm {
+    padding-top: 10px;
+}
+
+.padding-bottom-sm {
+    padding-bottom: 10px;
+}
+
+.padding-right-md {
+    padding-right: 20px;
+}
+
+.padding-left-md {
+    padding-left: 20px;
+}
+
+.padding-right-sm {
+    padding-right: 10px;
+}
+
+.padding-left-sm {
+    padding-left: 15px;
+}
+
+.padding-right-lg {
+    padding-right: 40px;
+}
+
+.padding-top-lg {
+    padding-top: 30px;
+}
+
+.padding-left-lg {
+    padding-left: 30px;
+}
+
+.padding-bottom-lt {
+    padding-bottom: 5px;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.color-g {
+    color: #008000;
+}
+
+.color-gl {
+    color: rgba(223, 235, 223, 1);
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.icon-fa {
+    font-weight: bold;
+    font-size: 14pt;
+    cursor: pointer;
+}
+
+.color-w {
+    color: #FFFFFF;
+}
+
+a:hover, a:focus {
+    text-decoration: none;
+    color: #008000;
+}
+
+
+.table > tbody > tr:nth-child(2n) > td, .indem.table-striped > tbody > tr:nth-child(2n) > th {
+    background-color: rgba(223, 235, 223, 1);
+}
+
+.table > tbody > tr:nth-child(2n+1) > td, .indem.table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: white;
+}
+
+.table.table-hover > tbody > tr:hover >td {
+    background-color: #008000;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.table.table-hover > tbody > tr:hover >td >a.fa {
+    color: #ffffff!important;
+}
+
+.table.table-hover > tbody > tr:hover >td >span.fa {
+    color: #ffffff;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.class-checkbox {
+    width: 25px;
+    height: 25px;
+}
+
+.text-align-r {
+    text-align: right;
+}
+
+.sortable-list {
+    width: 100%;
+}
+
+/*
+input {
+    height: 25px!important;
+}*/

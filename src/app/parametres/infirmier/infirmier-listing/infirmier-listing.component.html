@@ -1,0 +1,53 @@
+<div class="row remove-all-space">
+  <div class="col-12 bgc-w padding-sm"><input type="text" id="infirmier-search" class="form-control" placeholder="Nom, Pr&eacute;noms, Service ..."></div>
+  <!--diagnostique add modal here.-->
+
+  <div class="col-12 remove-all-padding">
+    <app-infirmier-add></app-infirmier-add>
+    <app-infirmier-edit></app-infirmier-edit>
+
+    <table *ngIf="infirmiers && infirmiers.length != 0" class="table table-borderless table-striped table-hover">
+      <tr *ngFor="let editInfirmier of infirmiers |paginate:{itemsPerPage:itemsPerPage,currentPage:p}" >
+        <td width="3%">
+          <br>
+          <input type="radio" name="infirmierChoix" class="class-checkbox cursor-pointer" (click)="choiseInfirmier(editInfirmier._id)">
+        </td>
+        <td width="27%">
+          <span>Nom & pr&eacute;noms</span> <br>
+          <span *ngFor="let personne of personnes"><strong *ngIf="personne._id == editInfirmier.id_personne"><span *ngFor="let titre of titres"><span *ngIf="titre._id == editInfirmier.id_titre">{{titre.code_titre}} &nbsp;</span></span><span>{{personne.nom_pers}}</span>&nbsp;&nbsp;<span>{{personne.prenom_pers}}</span></strong></span>
+        </td>
+        <td width="23%">
+          <span>Service</span> <br>
+          <span *ngFor="let service of services"><strong *ngIf="service._id == editInfirmier.id_service">{{service.libelle_service}}</strong></span>
+        </td>
+        <td width="20%">
+          <span>T&eacute;l&eacute;phone</span> <br>
+          <span *ngFor="let personne of personnes"><strong *ngIf="personne._id == editInfirmier.id_personne">{{personne.telephone_portable}}</strong></span>
+        </td>
+        <td width="23%">
+          <span>E-Mail</span> <br>
+          <span *ngFor="let personne of personnes"><strong *ngIf="personne._id == editInfirmier.id_personne">{{personne.email}}</strong></span>
+        </td>
+        <td width="4%">
+          <br>
+          <span class="fa fa-pencil icon-fa font-bold color-g" title="modifier" (click)="openEdit(editInfirmier._id)"></span><!--&nbsp;&nbsp;&nbsp;
+          <span class="fa fa-remove icon-fa font-bold color-g" title="supprimer" (click)="openRemove(editDiagnostique._id)"></span>-->
+        </td>
+      </tr>
+    </table>
+    <div *ngIf="infirmiers && infirmiers.length != 0" class="pagination-div">
+      <div class="row ">
+        <div class="col-lg-6"> <!--page {{p}} sur {{totalPage}} (totale: {{total}})--> </div>
+        <div class="col-lg-6 pull-right">
+          <pagination-controls (pageChange)="p = $event" class=my-pagination></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!infirmiers || infirmiers.length == 0" class="bgc-w padding-sm color-gl font-bold">
+      <i>Aucun infirmier trouv&eacute; !!!</i>
+    </div>
+  </div>
+  <div class="col-12 remove-all-padding">
+    <app-personnel-detail></app-personnel-detail>
+  </div>
+</div>

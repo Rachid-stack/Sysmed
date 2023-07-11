@@ -1,0 +1,59 @@
+<div class="row remove-all-space">
+  <div class="col-12 remove-all-padding">Param&egrave;tres : <span class="font-bold">Chambres/Lits</span></div>
+  <div class="col-12 bgc-w padding-sm"><input type="text" id="chambre-search" class="form-control" placeholder="code, Nom ..."></div>
+
+  <div class="col-12 remove-all-padding">
+    <app-chambres-add></app-chambres-add>
+    <app-chambres-edit></app-chambres-edit>
+    <app-chambres-delete></app-chambres-delete>
+
+    <table *ngIf="chambres && chambres.length != 0" class="table table-borderless table-striped table-hover">
+      <tr *ngFor="let chambre of chambres |paginate:{itemsPerPage:itemsPerPage,currentPage:p}" >
+        <td width="3%">
+          <br>
+          <input type="radio" name="chambreChoix" class="class-checkbox cursor-pointer" (click)="choiseChambre(chambre._id)">
+        </td>
+        <td width="15%">
+          <span>Code</span> <br>
+          <span><strong>{{chambre.code_chambre}}</strong></span>
+        </td>
+        <td width="20%">
+          <span>Unit&eacute;</span> <br>
+          <span *ngFor="let unite of unites"><strong *ngIf="chambre.id_unite == unite._id">{{unite.libelle_unite}}</strong></span>
+        </td>
+        <td width="20%">
+          <span>Nom</span> <br>
+          <span><strong>{{chambre.libelle_chambre}}</strong></span>
+        </td>
+        <td width="18%">
+          <span>&Eacute;quipements</span> <br>
+          <span *ngFor="let equipement of equipements"><span *ngFor="let cequipement of cequipements"><span *ngIf="chambre._id == cequipement.id_chambre && equipement._id == cequipement.id_equipement" [class]="equipement.class_equipement"> &nbsp;</span></span></span>
+        </td>
+        <td width="20%">
+          <span>Description</span> <br>
+          <span><strong>{{(chambre.desc_chambre == '' || !chambre.desc_chambre)?'---':chambre.desc_chambre}}</strong></span>
+        </td>
+        <td width="4%">
+          <br>
+          <span class="fa fa-pencil icon-fa font-bold color-g" title="modifier" (click)="openEdit(chambre._id)"></span><!--&nbsp;&nbsp;&nbsp;
+          <span class="fa fa-remove icon-fa font-bold color-g" title="supprimer" (click)="openRemove(chambre._id)"></span>-->
+        </td>
+      </tr>
+    </table>
+    <div *ngIf="chambres && chambres.length != 0" class="pagination-div">
+      <div class="row ">
+        <div class="col-lg-6"> <!--page {{p}} sur {{totalPage}} (totale: {{total}})--> </div>
+        <div class="col-lg-6 pull-right">
+          <pagination-controls (pageChange)="p = $event" class=my-pagination></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!chambres || chambres.length == 0" class="bgc-w padding-sm color-gl font-bold">
+      <i>Aucune chambre trouv&eacute;e !!!</i>
+    </div>
+  </div>
+  <div class="col-12 remove-all-padding">
+    <app-lits-listing></app-lits-listing>
+  </div>
+
+</div>
